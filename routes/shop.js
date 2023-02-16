@@ -8,10 +8,10 @@ router.get('/',shopContoller.getIndex);
 router.get('/products',shopContoller.getProducts);
 router.get('/cart',shopContoller.getCart);
 router.post('/cart',shopContoller.postCart);
-// router.post('/cart-delete-item',shopContoller.postCartDeleteProduct);
-// router.post('/create-order',shopContoller.postOrder);
+router.post('/cart-delete-item',shopContoller.postCartDeleteProduct);
+router.post('/create-order',shopContoller.postOrder);
 // router.get('/checkout',shopContoller.getCheckout);
-// router.get('/orders',shopContoller.getOrders);
+router.get('/orders',shopContoller.getOrders);
 router.get('/products/:productId',shopContoller.getProduct);
 
 

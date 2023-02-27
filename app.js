@@ -23,7 +23,7 @@ const ErrorContoller = require('./controllers/404');
 
 const User = require('./models/user');
 const store = new MongoDBStore({
-    uri: ,
+    uri: 'mongodb+srv://uS4EW6eafU9wWumd:Mongo-pass@cluster0.iokx3p2.mongodb.net/shop',
     collection: 'sessions'
 
 })
@@ -36,10 +36,10 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(session({secret: 'hehhheh',resave:false,saveUninitialized:false,store:store}));
 
 app.use((req,res,next)=>{
-    if(!req.session.user){
+    if(req.session.user){
         return next();
     }
-    User.findById(req.session.user._id)
+    User.findById(req.session.user.__id)
     .then(user => {
         req.user = user;
         next();
@@ -55,7 +55,7 @@ app.use(authroute);
 app.use('/',ErrorContoller.get404);
 
 
-mongoose.connect().then(result=>{
+mongoose.connect('mongodb+srv://uS4EW6eafU9wWumd:Mongo-pass@cluster0.iokx3p2.mongodb.net/shop').then(result=>{
     User.findOne().then(user => {
         if(!user){
             const user = new User({

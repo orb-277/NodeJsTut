@@ -23,7 +23,7 @@ const ErrorContoller = require('./controllers/404');
 
 const User = require('./models/user');
 const store = new MongoDBStore({
-    uri: 'mongodb+srv://uS4EW6eafU9wWumd:Mongo-pass@cluster0.iokx3p2.mongodb.net/shop',
+    uri: ,
     collection: 'sessions'
 
 })
@@ -55,7 +55,7 @@ app.use(authroute);
 app.use('/',ErrorContoller.get404);
 
 
-mongoose.connect('mongodb+srv://uS4EW6eafU9wWumd:Mongo-pass@cluster0.iokx3p2.mongodb.net/shop').then(result=>{
+mongoose.connect().then(result=>{
     User.findOne().then(user => {
         if(!user){
             const user = new User({

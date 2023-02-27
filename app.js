@@ -36,10 +36,10 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(session({secret: 'hehhheh',resave:false,saveUninitialized:false,store:store}));
 
 app.use((req,res,next)=>{
-    if(req.session.user){
+    if(!req.session.user){
         return next();
     }
-    User.findById(req.session.user.__id)
+    User.findById(req.session.user._id)
     .then(user => {
         req.user = user;
         next();
@@ -56,21 +56,10 @@ app.use('/',ErrorContoller.get404);
 
 
 mongoose.connect('mongodb+srv://uS4EW6eafU9wWumd:Mongo-pass@cluster0.iokx3p2.mongodb.net/shop').then(result=>{
-    User.findOne().then(user => {
-        if(!user){
-            const user = new User({
-                name: 'Om',
-                email: 'om@test.com',
-                cart:{
-                    items:[]
-                }
-            });
-            user.save();
-        }
-        
-        app.listen(3000);
-    })
 
+        
+        
+    app.listen(3000);
 
 }).catch(e=>{
     console.log(e);
